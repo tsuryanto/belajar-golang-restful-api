@@ -12,7 +12,7 @@ import (
 type CategoryRepositoryImpl struct {
 }
 
-func Save(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
+func (repository *CategoryRepositoryImpl) Save(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
 	SQL := "INSERT INTP category(name) values (?)"
 	result, err := tx.ExecContext(ctx, SQL, category.Name)
 	helper.PanicIfError(err)
@@ -24,7 +24,7 @@ func Save(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Cate
 	return category
 }
 
-func Update(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
+func (repository *CategoryRepositoryImpl) Update(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Category {
 	SQL := "UPDATE category SET name = ? where id = ?"
 	_, err := tx.ExecContext(ctx, SQL, category.Name, category.Id)
 	helper.PanicIfError(err)
@@ -32,13 +32,13 @@ func Update(ctx context.Context, tx *sql.Tx, category domain.Category) domain.Ca
 	return category
 }
 
-func Delete(ctx context.Context, tx *sql.Tx, category domain.Category) {
+func (repository *CategoryRepositoryImpl) Delete(ctx context.Context, tx *sql.Tx, category domain.Category) {
 	SQL := "DELETE from category where id = ?"
 	_, err := tx.ExecContext(ctx, SQL, category.Id)
 	helper.PanicIfError(err)
 }
 
-func FindById(ctx context.Context, tx *sql.Tx, categoryId int) (domain.Category, error) {
+func (repository *CategoryRepositoryImpl) FindById(ctx context.Context, tx *sql.Tx, categoryId int) (domain.Category, error) {
 	SQL := "SELECT id,name FROM category WHERE id = ?"
 	rows, err := tx.QueryContext(ctx, SQL, categoryId)
 	helper.PanicIfError(err)
@@ -53,7 +53,7 @@ func FindById(ctx context.Context, tx *sql.Tx, categoryId int) (domain.Category,
 	}
 }
 
-func FindAll(ctx context.Context, tx *sql.Tx) []domain.Category {
+func (repository *CategoryRepositoryImpl) FindAll(ctx context.Context, tx *sql.Tx) []domain.Category {
 	SQL := "SELECT id, name from category"
 	rows, err := tx.QueryContext(ctx, SQL)
 	helper.PanicIfError(err)

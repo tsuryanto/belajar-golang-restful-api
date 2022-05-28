@@ -1,45 +1,35 @@
 {
-    "openapi": "3.0.2",
+    "openapi":"3.0.2",
     "info": {
-        "title": "Category RESTful API",
-        "description": "API Spec for Category RESTful API",
-        "version": "1.0.0"
+      "title":"Category Restful API",
+      "description": "API Spec For Category RESTFUL API",
+      "version":"1.0"
     },
     "servers": [
-        {
-            "url": "http://localhost/api"
-        }
+      {"url":"https://localhost:3000/api"}
     ],
     "paths": {
-        "/categories": {
-            "get": {
-                "security": [
-                    {
-                        "CategoryAuth": []
-                    }
-                ],
-                "tags": [
-                    "Category API"
-                ],
-                "description": "List All Categories",
-                "summary": "List All Categories",
+        "/categories" : {
+            "get" : {
+                "tags": ["Category API"],
+                "summary": "List All Caregories",
                 "responses": {
-                    "200": {
-                        "description": "Success get all categories",
+                    "200" : {
+                        "description": "Success get All categories",                        
                         "content": {
-                            "application/json": {
-                                "schema": {
+                            "application/json" : {
+                                "schema" : {
                                     "type": "object",
                                     "properties": {
-                                        "code": {
+                                        "code" : {
                                             "type": "number"
                                         },
-                                        "status": {
+                                        "status" : {
                                             "type": "string"
                                         },
-                                        "data": {
+                                        "data" : {
                                             "type": "array",
-                                            "items": {
+                                            "items" : {
                                                 "$ref": "#/components/schemas/Category"
                                             }
                                         }
@@ -50,47 +40,25 @@
                     }
                 }
             },
-            "post": {
-                "security": [
-                    {
-                        "CategoryAuth": []
-                    }
-                ],
-                "tags": [
-                    "Category API"
-                ],
-                "description": "Create New Category",
+            "post" : {
+                "tags": ["Category API"],
                 "summary": "Create New Category",
-                "requestBody": {
+                "requestBody" : {
                     "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateOrUpdateCategory"
+                        "application/json" : {
+                            "schema" : {
+                                "$ref" : "#/components/schemas/category_createorupdate_requestbody"
                             }
                         }
                     }
                 },
-                "responses": {
+                "responses" : {                    
                     "200": {
-                        "description": "Success Create Category",
+                        "description": "Success create category",
                         "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "number"
-                                        },
-                                        "status": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Category"
-                                            }
-                                        }
-                                    }
+                            "application/json":{
+                                "schema":{
+                                    "$ref" : "#/components/schemas/category_createorupdate_response"
                                 }
                             }
                         }
@@ -98,48 +66,43 @@
                 }
             }
         },
-        "/categories/{categoryId}": {
-            "get": {
-                "security": [
-                    {
-                        "CategoryAuth": []
-                    }
-                ],
-                "tags": [
-                    "Category API"
-                ],
-                "summary": "Get Category By Id",
-                "description": "Get Category By Id",
+        "/categories/{categoryId}" : {
+            "get" : {
+                "tags": ["Category API"],
+                "summary" :"Get Category By Id",
                 "parameters": [
                     {
-                        "name": "categoryId",
-                        "in": "path",
-                        "description": "Category Id",
+                        "name" : "categoryId",
+                        "in" : "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "description": "Category Id",
+                        "schema" : {
+                            "type": "number"                            
+                        },
+                        "examples" : {
+                            "1" : {
+                                "value" : 1,
+                                "description" : "Category Id = 1"
+                            }
+                        }                       
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success Get Category by Id",
+                    "200" : {
+                        "description": "Success Get Category",
                         "content": {
-                            "application/json": {
-                                "schema": {
+                            "application/json" : {
+                                "schema":{
                                     "type": "object",
                                     "properties": {
-                                        "code": {
+                                        "code":{
                                             "type": "number"
                                         },
-                                        "status": {
+                                        "status" : {
                                             "type": "string"
                                         },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Category"
-                                            }
+                                        "data" : {
+                                            "$ref" : "#/components/schemas/Category"
                                         }
                                     }
                                 }
@@ -148,98 +111,79 @@
                     }
                 }
             },
-            "put": {
-                "security": [
-                    {
-                        "CategoryAuth": []
-                    }
-                ],
-                "tags": [
-                    "Category API"
-                ],
-                "summary": "Update Category By Id",
-                "description": "Update Category By Id",
+            "put" : {
+                "tags": ["Category API"],
                 "parameters": [
-                    {
-                        "name": "categoryId",
-                        "in": "path",
-                        "description": "Category Id",
+                    {                        
+                        "name" : "categoryId",
+                        "in" : "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
+                        "description": "Category Id",
+                        "schema" : {
+                            "type": "number"                            
+                        },
+                        "examples" : {
+                            "1" : {
+                                "value" : 1,
+                                "description" : "Category Id = 1"
+                            }
                         }
                     }
                 ],
-                "requestBody": {
-                    "content": {
+                "requestBody" : {
+                    "content" : {
                         "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/CreateOrUpdateCategory"
+                            "schema" : {
+                                "$ref" : "#/components/schemas/category_createorupdate_requestbody"
                             }
                         }
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "Success Get Category by Id",
+                    "200" : {
+                        "description": "Success Get Category",
                         "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "code": {
-                                            "type": "number"
-                                        },
-                                        "status": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "$ref": "#/components/schemas/Category"
-                                            }
-                                        }
-                                    }
+                            "application/json" : {
+                                "schema":{
+                                    "$ref" : "#/components/schemas/category_createorupdate_response"
                                 }
                             }
                         }
                     }
-                }
+                }                
             },
-            "delete": {
-                "security": [
-                    {
-                        "CategoryAuth": []
-                    }
-                ],
-                "tags": [
-                    "Category API"
-                ],
-                "summary": "Delete Category By Id",
-                "description": "Delete Category By Id",
+            "delete" : {
+                "tags": ["Category API"],
+                "summary" :"Delete Category By Id",
                 "parameters": [
                     {
-                        "name": "categoryId",
-                        "in": "path",
-                        "description": "Category Id",
+                        "name" : "categoryId",
+                        "in" : "path",
                         "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "description": "Category Id",
+                        "schema" : {
+                            "type": "number"                            
+                        },
+                        "examples" : {
+                            "1" : {
+                                "value" : 1,
+                                "description" : "Category Id = 1"
+                            }
+                        }                       
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success Delete Category by Id",
+                    "200" : {
+                        "description": "Success Delete Category",
                         "content": {
-                            "application/json": {
-                                "schema": {
+                            "application/json" : {
+                                "schema":{
                                     "type": "object",
                                     "properties": {
-                                        "code": {
+                                        "code":{
                                             "type": "number"
                                         },
-                                        "status": {
+                                        "status" : {
                                             "type": "string"
                                         }
                                     }
@@ -247,39 +191,46 @@
                             }
                         }
                     }
-                }
+                }                
             }
         }
     },
     "components": {
-        "securitySchemes": {
-            "CategoryAuth": {
-                "type": "apiKey",
-                "in": "header",
-                "name": "X-API-Key",
-                "description": "Authentication for Category API"
-            }
-        },
         "schemas": {
-            "Category": {
+            "Category" : {
                 "type": "object",
                 "properties": {
-                    "id": {
+                    "id" : {
                         "type": "number"
                     },
-                    "name": {
+                    "name" : {
                         "type": "string"
                     }
                 }
             },
-            "CreateOrUpdateCategory": {
+            "category_createorupdate_requestbody" : {
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "name" : {
                         "type": "string"
                     }
-                }
+                }                
+            },
+            "category_createorupdate_response" : {
+                "type": "object",
+                "properties": {
+                    "code":{
+                        "type": "number"
+                    },
+                    "status" : {
+                        "type": "string"
+                    },
+                    "data" : {
+                        "$ref" : "#/components/schemas/Category"
+                    }
+                }                
             }
         }
     }
-}
+  }
+  

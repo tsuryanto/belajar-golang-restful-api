@@ -1,22 +1,26 @@
 ### GET ALL Categories
 GET http://localhost:3000/api/categories
+X-API-KEY : RAHASIA
 Accept: application/json
 
 ### CREATE New Category
 POST http://localhost:3000/api/categories
+X-API-KEY : RAHASIA
 Accept: application/json
 Content-Type: application/json
 
 {
-    "name" : "Book"
+    "name" : "Vegetable"
 }
 
 ### GET Category By Id
 GET http://localhost:3000/api/categories/1
+X-API-KEY : RAHASIA
 Accept: : application/json
 
 ### UPDATE Category By Id
 PUT http://localhost:3000/api/categories/1
+X-API-KEY : RAHASIA
 Accept: application/json
 Content-Type: application/json
 
@@ -26,6 +30,7 @@ Content-Type: application/json
 
 ### DELETE Category By Id
 PUT http://localhost:3000/api/categories/1
+X-API-KEY : RAHASIA
 Accept: application/json
 
 
@@ -34,12 +39,18 @@ Accept: application/json
 # ===== ERROR TEST ======
 # ***********************************
 
+### ERROR (401 UNAUTHORIZE)
+GET http://localhost:3000/api/categories
+Accept: : application/json
+
 ### ERROR GET Category By Id (404 NOT FOUND)
 GET http://localhost:3000/api/categories/100
+X-API-KEY : RAHASIA
 Accept: : application/json
 
 ### ERROR UPDATE Category By Id (400 BAD REQUEST) Validation Fail
 PUT http://localhost:3000/api/categories/2
+X-API-KEY : RAHASIA
 Accept: application/json
 Content-Type: application/json
 
